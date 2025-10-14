@@ -1,0 +1,59 @@
+FROM ros:jazzy
+
+# Raggruppa le installazioni in un unico layer per ottimizzare la build e l'immagine.
+# Aggiunge 'x11-apps' per fornire le librerie necessarie per le applicazioni GUI.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # Librerie per GUI
+    x11-apps \
+    # Pacchetti ROS base e di utilità
+    ros-jazzy-turtlesim* \
+    ros-jazzy-rqt-graph \
+    ros-jazzy-rqt-console \
+    wget \
+    ros-jazzy-urdf-tutorial \
+    liburdfdom-tools \
+    # Gazebo
+    ros-jazzy-ros-gz \
+    # Navigation & SLAM
+    ros-jazzy-navigation2 \
+    ros-jazzy-nav2-bringup \
+    ros-jazzy-cartographer \
+    ros-jazzy-cartographer-ros \
+    ros-jazzy-slam-toolbox \
+    # Dipendenze Python e di build
+    python3-colcon-common-extensions \
+    ros-jazzy-test-msgs \
+    python3-numpy \
+    python3-sklearn \
+    ros-jazzy-laser-filters \
+    # Pacchetti TurtleBot3
+    ros-jazzy-turtlebot3 \
+    ros-jazzy-image-geometry \
+    ros-jazzy-turtlebot3-simulations \
+    && rm -rf /var/lib/apt/lists/*
+
+
+# Crea workspace
+WORKDIR /root/ros_workspace/src
+
+# Clona il pacchetto nav2_exploration da sorgente (es. repo di SteveMacenski)
+RUN git clone https://github.com/AniArka/Autonomous-Explorer-and-Mapper-ros2-nav2.git
+
+WORKDIR /root/ros_workspace
+
+# Compila il workspace per rendere il nuovo pacchetto disponibile.
+# È necessario sourcare l'ambiente ROS prima di compilare.
+RUN . /opt/ros/jazzy/setup.sh && colcon build --symlink-install
+
+
+### install in the workspace to be able to modify params
+#WORKDIR /root/ros_workspace/src
+#RUN git clone -b jazzy https://github.com/ros-navigation/navigation2.git
+
+
+# WORKDIR /root/ros_workspace/src
+#RUN git clone -b jazzy https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+#RUN git clone -b jazzy https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+#RUN git clone -b jazzy https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+#RUN git clone -b jazzy https://github.com/ROBOTIS-GIT/turtlebot3.git
+#WORKDIR /root/turtlebot_ws

@@ -1,0 +1,466 @@
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+from nav_msgs.msg import OccupancyGrid
+import numpy as np
+from geometry_msgs.msg import TransformStamped, Point
+import tf2_ros
+import tf2_geometry_msgs
+from threading import Lock
+from rclpy.qos import QoSProfile, DurabilityPolicy, ReliabilityPolicy, HistoryPolicy
+import yaml
+from ament_index_python.packages import get_package_share_directory
+import os
+from std_srvs.srv import Trigger
+import time
+
+class RobustMapMerger(Node):
+    def __init__(self):
+        super().__init__('robust_map_merger')
+        
+        # Carica le configurazioni dei robot dal file YAML
+        self.robot_configs = self.load_robot_configurations()
+        
+        # Configura QoS per mappe
+        map_qos = QoSProfile(
+            depth=10,
+            durability=DurabilityPolicy.TRANSIENT_LOCAL,
+            reliability=ReliabilityPolicy.RELIABLE,
+            history=HistoryPolicy.KEEP_LAST
+        )
+        
+        # Publishers and subscribers dinamici basati sui robot abilitati
+        self.merged_pub = self.create_publisher(OccupancyGrid, '/map_merged', map_qos)
+        
+        # Crea subscribers solo per i robot abilitati
+        self.map_subscribers = {}
+        self.maps = {}
+        
+        for robot_name, config in self.robot_configs.items():
+            if config['enabled']:
+                self.maps[robot_name] = None
+                topic_name = f'/{robot_name}/map'
+                self.map_subscribers[robot_name] = self.create_subscription(
+                    OccupancyGrid, 
+                    topic_name, 
+                    self.create_callback(robot_name), 
+                    map_qos
+                )
+                self.get_logger().info(f"Subscribed to {topic_name} for robot {robot_name}")
+        
+        
+        self.tf_buffer = tf2_ros.Buffer()
+        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
+        
+        self.map_lock = Lock()
+        
+        # Service per salvare la mappa con directory specificata
+        self.save_map_service = self.create_service(
+            Trigger, 
+            'save_merged_map', 
+            self.save_map_callback
+        )
+        
+        # Ultima mappa mergiata
+        self.last_merged_map = None
+        
+        # Merging parameters
+        self.merge_timer = self.create_timer(2.0, self.merge_maps)
+        
+        self.get_logger().info(f"Robust Map Merger started for {len(self.maps)} enabled robots")
+        self.get_logger().info("Use 'ros2 service call /save_merged_map std_srvs/srv/Trigger \"{}\"' to save the map")
+    
+    def save_map_callback(self, request, response):
+        """Callback per il servizio di salvataggio mappa"""
+        try:
+            if self.last_merged_map:
+                # Usa la directory di default del package
+                maps_dir = os.path.join(get_package_share_directory('merging_pkg'), 'maps')
+                success = self.save_map_to_file(self.last_merged_map, maps_dir)
+                if success:
+                    response.success = True
+                    response.message = f"Map saved successfully to {maps_dir}"
+                    self.get_logger().info(response.message)
+                else:
+                    response.success = False
+                    response.message = "Failed to save map"
+                    self.get_logger().error(response.message)
+            else:
+                response.success = False
+                response.message = "No merged map available to save"
+                self.get_logger().warn(response.message)
+            
+            return response
+            
+        except Exception as e:
+            self.get_logger().error(f"Error saving map: {e}")
+            response.success = False
+            response.message = f"Error saving map: {str(e)}"
+            return response
+    
+    def save_map_to_file(self, map_msg, save_directory, map_name="merged_map"):
+        """Salva la mappa in file YAML e PGM nella directory specificata"""
+        try:
+            # Crea directory se non esiste
+            os.makedirs(save_directory, exist_ok=True)
+            
+            # Salva immagine PGM
+            pgm_filename = os.path.join(save_directory, f"{map_name}.pgm")
+            self.save_map_as_pgm(map_msg, pgm_filename)
+            
+            # Salva file YAML
+            yaml_filename = os.path.join(save_directory, f"{map_name}.yaml")
+            self.save_map_as_yaml(map_msg, os.path.basename(pgm_filename), yaml_filename)
+            
+            self.get_logger().info(f"Map saved to: {yaml_filename} and {pgm_filename}")
+            return True
+            
+        except Exception as e:
+            self.get_logger().error(f"Error saving map to file: {e}")
+            return False
+    
+    def save_map_as_pgm(self, map_msg, filename):
+        """Salva la mappa come file PGM"""
+        width = map_msg.info.width
+        height = map_msg.info.height
+        
+        with open(filename, 'wb') as pgm_file:  #wb serve per scrivere in binario
+            # Header PGM
+            header = f"P5\n{width} {height}\n255\n"
+            pgm_file.write(header.encode())
+            
+            # Dati della mappa
+            for i in range(height):
+                for j in range(width):
+                    idx = i * width + j
+                    value = map_msg.data[idx]
+                    
+                    # Converti i valori di OccupancyGrid in valori PGM
+                    if value == -1:  # Sconosciuto
+                        pgm_value = 205  # Grigio
+                    elif value == 0:   # Libero
+                        pgm_value = 254  # Bianco
+                    elif value == 100: # Occupato
+                        pgm_value = 0   # Nero
+                    else:              # Valori intermedi
+                        pgm_value = max(0, min(255, 255 - int(value * 2.55)))
+                    
+                    pgm_file.write(bytes([pgm_value]))
+    
+    def save_map_as_yaml(self, map_msg, pgm_filename, yaml_filename):
+        """Salva il file YAML di configurazione della mappa"""
+        # orientamento della quaterna unitaria
+        from tf_transformations import euler_from_quaternion
+        orientation = map_msg.info.origin.orientation
+        roll, pitch, yaw = euler_from_quaternion([orientation.x, orientation.y, orientation.z, orientation.w])
+        
+        yaml_data = {
+            'image': pgm_filename,
+            'resolution': float(map_msg.info.resolution),
+            'origin': [
+                float(map_msg.info.origin.position.x),
+                float(map_msg.info.origin.position.y),
+                float(yaw)
+            ],
+            'negate': 0,
+            'occupied_thresh': 0.65,
+            'free_thresh': 0.25
+        }
+        
+        with open(yaml_filename, 'w') as yaml_file:
+            yaml.dump(yaml_data, yaml_file, default_flow_style=False)
+    
+    def load_robot_configurations(self):
+        """Carica le configurazioni dei robot dal file YAML"""
+        try:
+            package_name = "slam_multi_robot"
+            config_path = os.path.join(
+                get_package_share_directory(package_name),
+                'config',
+                'robots.yaml'
+            )
+            
+            self.get_logger().info(f"Loading robot configurations from: {config_path}")
+            
+            with open(config_path, 'r') as file:
+                config_data = yaml.safe_load(file)
+            
+            robot_configs = {}
+            if 'robots' in config_data:
+                for robot in config_data['robots']:
+                    robot_name = robot['name']
+                    robot_configs[robot_name] = {
+                        'x_pose': float(robot['x_pose']),
+                        'y_pose': float(robot['y_pose']),
+                        'z_pose': float(robot['z_pose']),
+                        'enabled': robot['enabled']
+                    }
+                    self.get_logger().info(f"Loaded config for {robot_name}: {robot_configs[robot_name]}")
+            
+            self.get_logger().info(f"Successfully loaded configurations for {len(robot_configs)} robots")
+            return robot_configs
+            
+        except Exception as e:
+            self.get_logger().error(f"Failed to load robot configurations: {e}")
+            return self.get_default_configurations()
+    
+    def get_default_configurations(self):
+        """Configurazioni di default se il file YAML non viene trovato"""
+        self.get_logger().warn("Using default robot configurations")
+        return {
+            'tb1': {'x_pose': 0.5, 'y_pose': -0.5, 'z_pose': 0.01, 'enabled': True},
+            'tb2': {'x_pose': -1.5, 'y_pose': 0.5, 'z_pose': 0.01, 'enabled': True},
+            'tb3': {'x_pose': -0.5, 'y_pose': -0.5, 'z_pose': 0.01, 'enabled': False},
+            'tb4': {'x_pose': 1.5, 'y_pose': 0.5, 'z_pose': 0.01, 'enabled': False}
+        }
+    
+    def create_callback(self, robot_name):
+        """Crea una callback function per un robot specifico"""
+        def callback(msg):
+            with self.map_lock:
+                self.maps[robot_name] = msg
+            self.get_logger().debug(f"Received map for {robot_name}")
+        return callback
+    
+    def merge_maps(self):
+        with self.map_lock:
+            available_maps = {k: v for k, v in self.maps.items() if v is not None}
+            if len(available_maps) < 1:
+                self.get_logger().debug(f"Waiting for maps. Currently have: {list(available_maps.keys())}")
+                return
+            
+            try:
+                merged_map = self.create_merged_map_advanced(available_maps)
+                if merged_map:
+                    self.merged_pub.publish(merged_map)
+                    self.last_merged_map = merged_map  # Salva l'ultima mappa
+                    self.get_logger().info(f"Successfully published merged map from {len(available_maps)} robots")
+                
+            except Exception as e:
+                self.get_logger().error(f"Error merging maps: {e}")
+    
+    def create_merged_map_advanced(self, available_maps):
+        """Advanced merging logic that properly combines all available maps"""
+        
+      
+        transforms = {}
+        for robot_name in available_maps.keys():
+            transform = self.get_map_transform(robot_name)
+            if transform:
+                transforms[robot_name] = transform
+        
+        if len(transforms) < 1:
+            self.get_logger().warn("Could not get enough transforms, using fallback merge")
+            return self.fallback_merge(available_maps)
+        
+       
+        bounds = self.calculate_merged_bounds(available_maps, transforms)
+        
+        
+        merged_map = self.create_empty_merged_map(bounds)
+        
+        
+        for robot_name, map_msg in available_maps.items():
+            if robot_name in transforms:
+                self.merge_single_map(merged_map, map_msg, transforms[robot_name])
+        
+        return merged_map
+    
+    def get_map_transform(self, robot_name):
+        """Get transform from robot's map frame to global map frame"""
+        try:
+            transform = self.tf_buffer.lookup_transform(
+                'map', 
+                f'{robot_name}/map', 
+                rclpy.time.Time(),
+                timeout=rclpy.duration.Duration(seconds=1.0)
+            )
+            return transform
+        except Exception as e:
+            self.get_logger().warn(f"Could not get transform for {robot_name}: {e}")
+            return self.create_transform_from_yaml_pose(robot_name)
+    
+    def create_transform_from_yaml_pose(self, robot_name):
+        """Create transform from YAML pose when TF is not available"""
+        if robot_name in self.robot_configs:
+            config = self.robot_configs[robot_name]
+            transform = TransformStamped()
+            transform.transform.translation.x = config['x_pose']
+            transform.transform.translation.y = config['y_pose']
+            transform.transform.translation.z = config['z_pose']
+            transform.transform.rotation.w = 1.0  
+            return transform
+        return None
+    
+    def calculate_merged_bounds(self, available_maps, transforms):
+        """Calculate the bounds needed to contain all maps"""
+        min_x, min_y = float('inf'), float('inf')
+        max_x, max_y = float('-inf'), float('-inf')
+        
+        for robot_name, map_msg in available_maps.items():
+            if robot_name in transforms:
+                corners = self.get_map_corners(map_msg, transforms[robot_name])
+                
+                for corner in corners:
+                    min_x = min(min_x, corner.x)
+                    min_y = min(min_y, corner.y)
+                    max_x = max(max_x, corner.x)
+                    max_y = max(max_y, corner.y)
+        
+        
+        if min_x == float('inf'):
+            for robot_name, config in self.robot_configs.items():
+                if config['enabled']:
+                    min_x = min(min_x, config['x_pose'] - 5.0)
+                    min_y = min(min_y, config['y_pose'] - 5.0)
+                    max_x = max(max_x, config['x_pose'] + 5.0)
+                    max_y = max(max_y, config['y_pose'] + 5.0)
+        
+        # Aggiunge del bordo
+        padding = 1.0
+        return {
+            'min_x': min_x - padding,
+            'min_y': min_y - padding,
+            'max_x': max_x + padding,
+            'max_y': max_y + padding
+        }
+    
+    def get_map_corners(self, map_msg, transform):
+        """Get the four corners of a map in global coordinates"""
+        corners = []
+        origin_x = map_msg.info.origin.position.x
+        origin_y = map_msg.info.origin.position.y
+        width = map_msg.info.width * map_msg.info.resolution
+        height = map_msg.info.height * map_msg.info.resolution
+        
+        local_corners = [
+            Point(x=origin_x, y=origin_y, z=0.0),
+            Point(x=origin_x + width, y=origin_y, z=0.0),
+            Point(x=origin_x + width, y=origin_y + height, z=0.0),
+            Point(x=origin_x, y=origin_y + height, z=0.0)
+        ]
+        
+        # Transformagli angoli in coordinate globali
+        for corner in local_corners:
+            global_corner = tf2_geometry_msgs.do_transform_point(
+                tf2_geometry_msgs.PointStamped(point=corner), 
+                transform
+            )
+            corners.append(global_corner.point)
+        
+        return corners
+    
+    def create_empty_merged_map(self, bounds):
+        """Create an empty merged map with the specified bounds"""
+        merged_map = OccupancyGrid()
+        merged_map.header.stamp = self.get_clock().now().to_msg()
+        merged_map.header.frame_id = "map"
+        
+        
+        resolution = 0.05
+        
+        merged_map.info.resolution = resolution
+        
+        #calcola larghezza e altezza
+        width = int((bounds['max_x'] - bounds['min_x']) / resolution)
+        height = int((bounds['max_y'] - bounds['min_y']) / resolution)
+        
+        #assiucurati che width e height siano in un range ragionevole
+        width = max(10, min(width, 10000))
+        height = max(10, min(height, 10000))
+        
+        merged_map.info.width = width
+        merged_map.info.height = height
+        
+       
+        merged_map.info.origin.position.x = bounds['min_x']
+        merged_map.info.origin.position.y = bounds['min_y']
+        merged_map.info.origin.position.z = 0.0
+        merged_map.info.origin.orientation.w = 1.0
+        
+       
+        merged_map.data = [-1] * (width * height)
+        
+        return merged_map
+    
+    def merge_single_map(self, merged_map, source_map, transform):
+        """Merge a single map into the merged map"""
+        resolution = merged_map.info.resolution
+        merged_origin_x = merged_map.info.origin.position.x
+        merged_origin_y = merged_map.info.origin.position.y
+        
+        source_resolution = source_map.info.resolution
+        source_origin_x = source_map.info.origin.position.x
+        source_origin_y = source_map.info.origin.position.y
+        
+        # Itera attraverso ogni cella della mappa sorgente
+        for y in range(source_map.info.height):
+            for x in range(source_map.info.width):
+                source_idx = y * source_map.info.width + x
+                source_value = source_map.data[source_idx]
+                
+                if source_value == -1:
+                    continue
+                
+             
+                world_x = source_origin_x + (x + 0.5) * source_resolution
+                world_y = source_origin_y + (y + 0.5) * source_resolution
+                
+               
+                source_point = Point(x=world_x, y=world_y, z=0.0)
+                global_point = tf2_geometry_msgs.do_transform_point(
+                    tf2_geometry_msgs.PointStamped(point=source_point), 
+                    transform
+                )
+                
+                
+                merged_x = int((global_point.point.x - merged_origin_x) / resolution)
+                merged_y = int((global_point.point.y - merged_origin_y) / resolution)
+                
+              
+                if (0 <= merged_x < merged_map.info.width and 
+                    0 <= merged_y < merged_map.info.height):
+                    
+                    merged_idx = merged_y * merged_map.info.width + merged_x
+                    
+                   
+                    current_value = merged_map.data[merged_idx]
+                    
+                    if current_value == -1:
+                        merged_map.data[merged_idx] = source_value
+                    elif source_value == 100:
+                        merged_map.data[merged_idx] = 100
+                    elif source_value == 0 and current_value != 100:
+                        merged_map.data[merged_idx] = 0
+    
+    def fallback_merge(self, available_maps):
+        """Simple fallback merge when transforms aren't available"""
+        self.get_logger().info("Using fallback merge")
+        
+        if available_maps:
+            first_robot = list(available_maps.keys())[0]
+            merged_map = OccupancyGrid()
+            merged_map.header = available_maps[first_robot].header
+            merged_map.info = available_maps[first_robot].info
+            merged_map.data = available_maps[first_robot].data[:]
+            
+            return merged_map
+        
+        return None
+
+def main():
+    rclpy.init()
+    node = RobustMapMerger()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        
+        if node.last_merged_map:
+            node.get_logger().info("Saving map before shutdown...")
+            maps_dir = os.path.join(get_package_share_directory('merging_pkg'), 'maps')
+            node.save_map_to_file(node.last_merged_map, maps_dir, "shutdown_save")
+        node.destroy_node()
+        rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
