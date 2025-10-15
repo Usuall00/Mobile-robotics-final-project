@@ -18,7 +18,7 @@ setup(
     zip_safe=True,
     maintainer='root',
     maintainer_email='root@todo.todo',
-    description='Custom map merging package for 4 robots',
+    description='Custom map merging package with dynamic save functionality',
     license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={

@@ -18,6 +18,17 @@ class RobustMapMerger(Node):
     def __init__(self):
         super().__init__('robust_map_merger')
         
+        # Parametri configurabili
+        self.save_directory = self.declare_parameter(
+            'save_directory', 
+            os.path.expanduser('~/ros_maps')
+        ).value
+        
+        self.map_name = self.declare_parameter(
+            'map_name', 
+            'merged_map'
+        ).value
+        
         # Carica le configurazioni dei robot dal file YAML
         self.robot_configs = self.load_robot_configurations()
         
@@ -29,7 +40,7 @@ class RobustMapMerger(Node):
             history=HistoryPolicy.KEEP_LAST
         )
         
-        # Publishers and subscribers dinamici basati sui robot abilitati
+        # Publishers and subscribers
         self.merged_pub = self.create_publisher(OccupancyGrid, '/map_merged', map_qos)
         
         # Crea subscribers solo per i robot abilitati
@@ -48,13 +59,13 @@ class RobustMapMerger(Node):
                 )
                 self.get_logger().info(f"Subscribed to {topic_name} for robot {robot_name}")
         
-        
+        # TF buffer for transforms
         self.tf_buffer = tf2_ros.Buffer()
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
         
         self.map_lock = Lock()
         
-        # Service per salvare la mappa con directory specificata
+        # Service per salvare la mappa
         self.save_map_service = self.create_service(
             Trigger, 
             'save_merged_map', 
@@ -68,18 +79,25 @@ class RobustMapMerger(Node):
         self.merge_timer = self.create_timer(2.0, self.merge_maps)
         
         self.get_logger().info(f"Robust Map Merger started for {len(self.maps)} enabled robots")
-        self.get_logger().info("Use 'ros2 service call /save_merged_map std_srvs/srv/Trigger \"{}\"' to save the map")
+        self.get_logger().info(f"Save directory: {self.save_directory}")
+        self.get_logger().info(f"Map name: {self.map_name}")
+        self.get_logger().info("Usage:")
+        self.get_logger().info("1. Change directory: ros2 param set /robust_map_merger save_directory '/path/to/directory'")
+        self.get_logger().info("2. Change map name: ros2 param set /robust_map_merger map_name 'my_map'")
+        self.get_logger().info("3. Save map: ros2 service call /save_merged_map std_srvs/srv/Trigger '{}'")
     
     def save_map_callback(self, request, response):
         """Callback per il servizio di salvataggio mappa"""
         try:
             if self.last_merged_map:
-                # Usa la directory di default del package
-                maps_dir = os.path.join(get_package_share_directory('merging_pkg'), 'maps')
-                success = self.save_map_to_file(self.last_merged_map, maps_dir)
+                # Ottieni i parametri correnti
+                current_save_dir = self.get_parameter('save_directory').value
+                current_map_name = self.get_parameter('map_name').value
+                
+                success = self.save_map_to_file(self.last_merged_map, current_save_dir, current_map_name)
                 if success:
                     response.success = True
-                    response.message = f"Map saved successfully to {maps_dir}"
+                    response.message = f"Map '{current_map_name}' saved successfully to {current_save_dir}"
                     self.get_logger().info(response.message)
                 else:
                     response.success = False
@@ -101,6 +119,9 @@ class RobustMapMerger(Node):
     def save_map_to_file(self, map_msg, save_directory, map_name="merged_map"):
         """Salva la mappa in file YAML e PGM nella directory specificata"""
         try:
+            # Espandi il path se contiene ~
+            save_directory = os.path.expanduser(save_directory)
+            
             # Crea directory se non esiste
             os.makedirs(save_directory, exist_ok=True)
             
@@ -110,9 +131,9 @@ class RobustMapMerger(Node):
             
             # Salva file YAML
             yaml_filename = os.path.join(save_directory, f"{map_name}.yaml")
-            self.save_map_as_yaml(map_msg, os.path.basename(pgm_filename), yaml_filename)
+            self.save_map_as_yaml(map_msg, f"{map_name}.pgm", yaml_filename)
             
-            self.get_logger().info(f"Map saved to: {yaml_filename} and {pgm_filename}")
+            self.get_logger().info(f"Map saved to: {yaml_filename}")
             return True
             
         except Exception as e:
@@ -124,7 +145,7 @@ class RobustMapMerger(Node):
         width = map_msg.info.width
         height = map_msg.info.height
         
-        with open(filename, 'wb') as pgm_file:  #wb serve per scrivere in binario
+        with open(filename, 'wb') as pgm_file:
             # Header PGM
             header = f"P5\n{width} {height}\n255\n"
             pgm_file.write(header.encode())
@@ -149,26 +170,45 @@ class RobustMapMerger(Node):
     
     def save_map_as_yaml(self, map_msg, pgm_filename, yaml_filename):
         """Salva il file YAML di configurazione della mappa"""
-        # orientamento della quaterna unitaria
-        from tf_transformations import euler_from_quaternion
-        orientation = map_msg.info.origin.orientation
-        roll, pitch, yaw = euler_from_quaternion([orientation.x, orientation.y, orientation.z, orientation.w])
-        
-        yaml_data = {
-            'image': pgm_filename,
-            'resolution': float(map_msg.info.resolution),
-            'origin': [
-                float(map_msg.info.origin.position.x),
-                float(map_msg.info.origin.position.y),
-                float(yaw)
-            ],
-            'negate': 0,
-            'occupied_thresh': 0.65,
-            'free_thresh': 0.25
-        }
-        
-        with open(yaml_filename, 'w') as yaml_file:
-            yaml.dump(yaml_data, yaml_file, default_flow_style=False)
+        try:
+            from tf_transformations import euler_from_quaternion
+            
+            orientation = map_msg.info.origin.orientation
+            roll, pitch, yaw = euler_from_quaternion([orientation.x, orientation.y, orientation.z, orientation.w])
+            
+            yaml_data = {
+                'image': pgm_filename,
+                'resolution': float(map_msg.info.resolution),
+                'origin': [
+                    float(map_msg.info.origin.position.x),
+                    float(map_msg.info.origin.position.y),
+                    float(yaw)
+                ],
+                'negate': 0,
+                'occupied_thresh': 0.65,
+                'free_thresh': 0.25
+            }
+            
+            with open(yaml_filename, 'w') as yaml_file:
+                yaml.dump(yaml_data, yaml_file, default_flow_style=False)
+                
+        except ImportError:
+            # Fallback se tf_transformations non è disponibile
+            yaml_data = {
+                'image': pgm_filename,
+                'resolution': float(map_msg.info.resolution),
+                'origin': [
+                    float(map_msg.info.origin.position.x),
+                    float(map_msg.info.origin.position.y),
+                    0.0
+                ],
+                'negate': 0,
+                'occupied_thresh': 0.65,
+                'free_thresh': 0.25
+            }
+            
+            with open(yaml_filename, 'w') as yaml_file:
+                yaml.dump(yaml_data, yaml_file, default_flow_style=False)
     
     def load_robot_configurations(self):
         """Carica le configurazioni dei robot dal file YAML"""
@@ -224,6 +264,7 @@ class RobustMapMerger(Node):
     
     def merge_maps(self):
         with self.map_lock:
+            # Check if we have at least 1 map
             available_maps = {k: v for k, v in self.maps.items() if v is not None}
             if len(available_maps) < 1:
                 self.get_logger().debug(f"Waiting for maps. Currently have: {list(available_maps.keys())}")
@@ -233,7 +274,7 @@ class RobustMapMerger(Node):
                 merged_map = self.create_merged_map_advanced(available_maps)
                 if merged_map:
                     self.merged_pub.publish(merged_map)
-                    self.last_merged_map = merged_map  # Salva l'ultima mappa
+                    self.last_merged_map = merged_map
                     self.get_logger().info(f"Successfully published merged map from {len(available_maps)} robots")
                 
             except Exception as e:
@@ -242,7 +283,7 @@ class RobustMapMerger(Node):
     def create_merged_map_advanced(self, available_maps):
         """Advanced merging logic that properly combines all available maps"""
         
-      
+        # Get map transforms to global frame
         transforms = {}
         for robot_name in available_maps.keys():
             transform = self.get_map_transform(robot_name)
@@ -253,13 +294,13 @@ class RobustMapMerger(Node):
             self.get_logger().warn("Could not get enough transforms, using fallback merge")
             return self.fallback_merge(available_maps)
         
-       
+        # Calculate merged map bounds
         bounds = self.calculate_merged_bounds(available_maps, transforms)
         
-        
+        # Create merged map
         merged_map = self.create_empty_merged_map(bounds)
         
-        
+        # Merge all maps into the merged frame
         for robot_name, map_msg in available_maps.items():
             if robot_name in transforms:
                 self.merge_single_map(merged_map, map_msg, transforms[robot_name])
@@ -278,6 +319,7 @@ class RobustMapMerger(Node):
             return transform
         except Exception as e:
             self.get_logger().warn(f"Could not get transform for {robot_name}: {e}")
+            # Fallback to initial pose from YAML
             return self.create_transform_from_yaml_pose(robot_name)
     
     def create_transform_from_yaml_pose(self, robot_name):
@@ -288,7 +330,7 @@ class RobustMapMerger(Node):
             transform.transform.translation.x = config['x_pose']
             transform.transform.translation.y = config['y_pose']
             transform.transform.translation.z = config['z_pose']
-            transform.transform.rotation.w = 1.0  
+            transform.transform.rotation.w = 1.0
             return transform
         return None
     
@@ -299,6 +341,7 @@ class RobustMapMerger(Node):
         
         for robot_name, map_msg in available_maps.items():
             if robot_name in transforms:
+                # Calculate corners of this map in global frame
                 corners = self.get_map_corners(map_msg, transforms[robot_name])
                 
                 for corner in corners:
@@ -307,7 +350,7 @@ class RobustMapMerger(Node):
                     max_x = max(max_x, corner.x)
                     max_y = max(max_y, corner.y)
         
-        
+        # Se non abbiamo mappe valide, usa le pose dai robot abilitati
         if min_x == float('inf'):
             for robot_name, config in self.robot_configs.items():
                 if config['enabled']:
@@ -316,8 +359,8 @@ class RobustMapMerger(Node):
                     max_x = max(max_x, config['x_pose'] + 5.0)
                     max_y = max(max_y, config['y_pose'] + 5.0)
         
-        # Aggiunge del bordo
-        padding = 1.0
+        # Add padding
+        padding = 2.0
         return {
             'min_x': min_x - padding,
             'min_y': min_y - padding,
@@ -340,7 +383,7 @@ class RobustMapMerger(Node):
             Point(x=origin_x, y=origin_y + height, z=0.0)
         ]
         
-        # Transformagli angoli in coordinate globali
+        # Transform corners to global frame
         for corner in local_corners:
             global_corner = tf2_geometry_msgs.do_transform_point(
                 tf2_geometry_msgs.PointStamped(point=corner), 
@@ -356,29 +399,29 @@ class RobustMapMerger(Node):
         merged_map.header.stamp = self.get_clock().now().to_msg()
         merged_map.header.frame_id = "map"
         
-        
+        # Set resolution
         resolution = 0.05
         
         merged_map.info.resolution = resolution
         
-        #calcola larghezza e altezza
+        # Calculate dimensions
         width = int((bounds['max_x'] - bounds['min_x']) / resolution)
         height = int((bounds['max_y'] - bounds['min_y']) / resolution)
         
-        #assiucurati che width e height siano in un range ragionevole
+        # Ensure reasonable dimensions
         width = max(10, min(width, 10000))
         height = max(10, min(height, 10000))
         
         merged_map.info.width = width
         merged_map.info.height = height
         
-       
+        # Set origin
         merged_map.info.origin.position.x = bounds['min_x']
         merged_map.info.origin.position.y = bounds['min_y']
         merged_map.info.origin.position.z = 0.0
         merged_map.info.origin.orientation.w = 1.0
         
-       
+        # Initialize with unknown (-1)
         merged_map.data = [-1] * (width * height)
         
         return merged_map
@@ -393,7 +436,7 @@ class RobustMapMerger(Node):
         source_origin_x = source_map.info.origin.position.x
         source_origin_y = source_map.info.origin.position.y
         
-        # Itera attraverso ogni cella della mappa sorgente
+        # For each cell in source map
         for y in range(source_map.info.height):
             for x in range(source_map.info.width):
                 source_idx = y * source_map.info.width + x
@@ -402,28 +445,28 @@ class RobustMapMerger(Node):
                 if source_value == -1:
                     continue
                 
-             
+                # Convert to world coordinates in source frame
                 world_x = source_origin_x + (x + 0.5) * source_resolution
                 world_y = source_origin_y + (y + 0.5) * source_resolution
                 
-               
+                # Transform to global frame
                 source_point = Point(x=world_x, y=world_y, z=0.0)
                 global_point = tf2_geometry_msgs.do_transform_point(
                     tf2_geometry_msgs.PointStamped(point=source_point), 
                     transform
                 )
                 
-                
+                # Convert to merged map coordinates
                 merged_x = int((global_point.point.x - merged_origin_x) / resolution)
                 merged_y = int((global_point.point.y - merged_origin_y) / resolution)
                 
-              
+                # Check bounds
                 if (0 <= merged_x < merged_map.info.width and 
                     0 <= merged_y < merged_map.info.height):
                     
                     merged_idx = merged_y * merged_map.info.width + merged_x
                     
-                   
+                    # Merge logic
                     current_value = merged_map.data[merged_idx]
                     
                     if current_value == -1:
@@ -454,11 +497,12 @@ def main():
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
-        
+        # Salva automaticamente all'uscita
         if node.last_merged_map:
             node.get_logger().info("Saving map before shutdown...")
-            maps_dir = os.path.join(get_package_share_directory('merging_pkg'), 'maps')
-            node.save_map_to_file(node.last_merged_map, maps_dir, "shutdown_save")
+            save_dir = node.get_parameter('save_directory').value
+            map_name = node.get_parameter('map_name').value
+            node.save_map_to_file(node.last_merged_map, save_dir, f"{map_name}_shutdown")
         node.destroy_node()
         rclpy.shutdown()
 
