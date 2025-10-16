@@ -1,0 +1,264 @@
+[0.144s] Invoking command in '/root/ros_workspace/build/dynamic_obstacle_detector_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /root/ros_workspace/src/dynamic_obstacle_detector_interfaces -DCMAKE_INSTALL_PREFIX=/root/ros_workspace/install/dynamic_obstacle_detector_interfaces
+[0.280s] -- The C compiler identification is GNU 13.3.0
+[0.393s] -- The CXX compiler identification is GNU 13.3.0
+[0.413s] -- Detecting C compiler ABI info
+[0.490s] -- Detecting C compiler ABI info - done
+[0.496s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.496s] -- Detecting C compile features
+[0.497s] -- Detecting C compile features - done
+[0.506s] -- Detecting CXX compiler ABI info
+[0.592s] -- Detecting CXX compiler ABI info - done
+[0.599s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.599s] -- Detecting CXX compile features
+[0.600s] -- Detecting CXX compile features - done
+[0.612s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.744s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.886s] -- Found rosidl_default_generators: 1.6.0 (/opt/ros/jazzy/share/rosidl_default_generators/cmake)
+[0.896s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.968s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.025s] -- Found rosidl_adapter: 4.6.6 (/opt/ros/jazzy/share/rosidl_adapter/cmake)
+[1.030s] -- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)
+[1.554s] -- Found ament_cmake_ros: 0.12.0 (/opt/ros/jazzy/share/ament_cmake_ros/cmake)
+[1.947s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.409s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.413s] -- Found python_cmake_module: 0.11.1 (/opt/ros/jazzy/share/python_cmake_module/cmake)
+[2.510s] -- Found PythonExtra: /usr/bin/python3  
+[2.820s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter Development NumPy Development.Module Development.Embed 
+[2.863s] -- Found ament_lint_auto: 0.17.3 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[2.901s] -- Added test 'lint_cmake' to check CMake code style
+[2.903s] -- Added test 'xmllint' to check XML markup files
+[2.906s] -- Configuring done (2.8s)
+[2.942s] -- Generating done (0.0s)
+[2.951s] -- Build files have been written to: /root/ros_workspace/build/dynamic_obstacle_detector_interfaces
+[2.957s] Invoked command in '/root/ros_workspace/build/dynamic_obstacle_detector_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /root/ros_workspace/src/dynamic_obstacle_detector_interfaces -DCMAKE_INSTALL_PREFIX=/root/ros_workspace/install/dynamic_obstacle_detector_interfaces
+[2.958s] Invoking command in '/root/ros_workspace/build/dynamic_obstacle_detector_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /root/ros_workspace/build/dynamic_obstacle_detector_interfaces -- -j20 -l20
+[2.998s] [  2%] [34m[1mGenerating type hashes for ROS interfaces[0m
+[3.006s] [  2%] Built target ament_cmake_python_copy_dynamic_obstacle_detector_interfaces
+[3.157s] running egg_info
+[3.158s] creating dynamic_obstacle_detector_interfaces.egg-info
+[3.173s] writing dynamic_obstacle_detector_interfaces.egg-info/PKG-INFO
+[3.173s] writing dependency_links to dynamic_obstacle_detector_interfaces.egg-info/dependency_links.txt
+[3.173s] writing top-level names to dynamic_obstacle_detector_interfaces.egg-info/top_level.txt
+[3.173s] writing manifest file 'dynamic_obstacle_detector_interfaces.egg-info/SOURCES.txt'
+[3.204s] reading manifest file 'dynamic_obstacle_detector_interfaces.egg-info/SOURCES.txt'
+[3.205s] writing manifest file 'dynamic_obstacle_detector_interfaces.egg-info/SOURCES.txt'
+[3.205s] [  2%] Built target dynamic_obstacle_detector_interfaces__rosidl_generator_type_description
+[3.216s] [  4%] [34m[1mGenerating C code for ROS interfaces[0m
+[3.244s] [  6%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[3.255s] [  6%] Built target ament_cmake_python_build_dynamic_obstacle_detector_interfaces_egg
+[3.510s] [  6%] Built target dynamic_obstacle_detector_interfaces__cpp
+[3.558s] [ 13%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_generator_c.dir/rosidl_generator_c/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__type_support.c.o[0m
+[3.558s] [ 13%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_generator_c.dir/rosidl_generator_c/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__description.c.o[0m
+[3.558s] [ 13%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_generator_c.dir/rosidl_generator_c/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__functions.c.o[0m
+[3.563s] [ 15%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_generator_c.dir/rosidl_generator_c/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__functions.c.o[0m
+[3.563s] [ 18%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_generator_c.dir/rosidl_generator_c/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__type_support.c.o[0m
+[3.563s] [ 20%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_generator_c.dir/rosidl_generator_c/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__description.c.o[0m
+[3.636s] [ 22%] [32m[1mLinking C shared library libdynamic_obstacle_detector_interfaces__rosidl_generator_c.so[0m
+[3.680s] [ 22%] Built target dynamic_obstacle_detector_interfaces__rosidl_generator_c
+[3.693s] [ 25%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[3.693s] [ 29%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[3.693s] [ 29%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[3.693s] [ 31%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[3.699s] [ 36%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[3.699s] [ 36%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[4.016s] [ 38%] [32mBuilding CXX object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/dynamic_obstacle_detector_interfaces/msg/tracked_object__type_support.cpp.o[0m
+[4.017s] [ 40%] [32mBuilding CXX object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/dynamic_obstacle_detector_interfaces/msg/tracked_object_array__type_support.cpp.o[0m
+[4.054s] [ 43%] [32mBuilding CXX object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/dynamic_obstacle_detector_interfaces/msg/tracked_object_array__type_support.cpp.o[0m
+[4.055s] [ 45%] [32mBuilding CXX object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/dynamic_obstacle_detector_interfaces/msg/tracked_object__type_support.cpp.o[0m
+[4.093s] [ 47%] [32mBuilding CXX object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__type_support.cpp.o[0m
+[4.093s] [ 50%] [32mBuilding CXX object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__type_support.cpp.o[0m
+[4.125s] [ 52%] [32mBuilding CXX object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/dynamic_obstacle_detector_interfaces/msg/detail/dds_fastrtps/tracked_object_array__type_support.cpp.o[0m
+[4.125s] [ 54%] [32mBuilding CXX object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/dynamic_obstacle_detector_interfaces/msg/detail/dds_fastrtps/tracked_object__type_support.cpp.o[0m
+[4.127s] [ 56%] [32mBuilding CXX object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__type_support_c.cpp.o[0m
+[4.127s] [ 59%] [32mBuilding CXX object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__type_support_c.cpp.o[0m
+[4.127s] [ 61%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__type_support.c.o[0m
+[4.129s] [ 63%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__type_support.c.o[0m
+[4.150s] [ 65%] [32m[1mLinking CXX shared library libdynamic_obstacle_detector_interfaces__rosidl_typesupport_c.so[0m
+[4.211s] [ 68%] [32m[1mLinking C shared library libdynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_c.so[0m
+[4.241s] [ 68%] Built target dynamic_obstacle_detector_interfaces__rosidl_typesupport_c
+[4.282s] [ 68%] Built target dynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_c
+[4.557s] [ 70%] [32m[1mLinking CXX shared library libdynamic_obstacle_detector_interfaces__rosidl_typesupport_cpp.so[0m
+[4.637s] [ 70%] Built target dynamic_obstacle_detector_interfaces__rosidl_typesupport_cpp
+[4.686s] [ 72%] [32m[1mLinking CXX shared library libdynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_cpp.so[0m
+[4.786s] [ 72%] Built target dynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_cpp
+[4.806s] [ 75%] [32m[1mLinking CXX shared library libdynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_cpp.so[0m
+[4.811s] [ 77%] [32m[1mLinking CXX shared library libdynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_c.so[0m
+[4.872s] [ 77%] Built target dynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_c
+[4.888s] [ 77%] Built target dynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_cpp
+[4.909s] [ 77%] Built target dynamic_obstacle_detector_interfaces
+[4.930s] [ 79%] [34m[1mGenerating Python code for ROS interfaces[0m
+[5.255s] [ 79%] Built target dynamic_obstacle_detector_interfaces__py
+[5.282s] [ 81%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_generator_py.dir/rosidl_generator_py/dynamic_obstacle_detector_interfaces/msg/_tracked_object_array_s.c.o[0m
+[5.284s] [ 84%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces__rosidl_generator_py.dir/rosidl_generator_py/dynamic_obstacle_detector_interfaces/msg/_tracked_object_s.c.o[0m
+[5.448s] [ 86%] [32m[1mLinking C shared library libdynamic_obstacle_detector_interfaces__rosidl_generator_py.so[0m
+[5.491s] [ 86%] Built target dynamic_obstacle_detector_interfaces__rosidl_generator_py
+[5.514s] [ 88%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_introspection_c.dir/rosidl_generator_py/dynamic_obstacle_detector_interfaces/_dynamic_obstacle_detector_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[5.514s] [ 90%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_fastrtps_c.dir/rosidl_generator_py/dynamic_obstacle_detector_interfaces/_dynamic_obstacle_detector_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[5.516s] [ 93%] [32mBuilding C object CMakeFiles/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_c.dir/rosidl_generator_py/dynamic_obstacle_detector_interfaces/_dynamic_obstacle_detector_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
+[5.606s] [ 95%] [32m[1mLinking C shared module rosidl_generator_py/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_c.so[0m
+[5.614s] [ 97%] [32m[1mLinking C shared module rosidl_generator_py/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_introspection_c.so[0m
+[5.626s] [100%] [32m[1mLinking C shared module rosidl_generator_py/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_fastrtps_c.so[0m
+[5.652s] [100%] Built target dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_c
+[5.660s] [100%] Built target dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_introspection_c
+[5.673s] [100%] Built target dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_fastrtps_c
+[5.689s] Invoked command in '/root/ros_workspace/build/dynamic_obstacle_detector_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /root/ros_workspace/build/dynamic_obstacle_detector_interfaces -- -j20 -l20
+[5.699s] Invoking command in '/root/ros_workspace/build/dynamic_obstacle_detector_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /root/ros_workspace/build/dynamic_obstacle_detector_interfaces
+[5.708s] -- Install configuration: ""
+[5.708s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/ament_index/resource_index/rosidl_interfaces/dynamic_obstacle_detector_interfaces
+[5.708s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/msg/TrackedObject.json
+[5.708s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/msg/TrackedObjectArray.json
+[5.709s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces
+[5.709s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg
+[5.709s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/tracked_object_array.h
+[5.709s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/rosidl_generator_c__visibility_control.h
+[5.710s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/tracked_object.h
+[5.710s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail
+[5.711s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__functions.h
+[5.711s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__type_support.c
+[5.711s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__type_support.h
+[5.711s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__struct.h
+[5.711s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__struct.h
+[5.711s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__functions.c
+[5.712s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__type_support.h
+[5.712s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__description.c
+[5.712s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__type_support.c
+[5.712s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__description.c
+[5.712s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__functions.h
+[5.712s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__functions.c
+[5.712s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/environment/library_path.sh
+[5.712s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/environment/library_path.dsv
+[5.712s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_generator_c.so
+[5.712s] -- Set non-toolchain portion of runtime path of "/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_generator_c.so" to ""
+[5.713s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces
+[5.713s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg
+[5.713s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[5.713s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail
+[5.713s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__rosidl_typesupport_fastrtps_c.h
+[5.713s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__rosidl_typesupport_fastrtps_c.h
+[5.713s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_c.so
+[5.713s] -- Set non-toolchain portion of runtime path of "/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_c.so" to ""
+[5.713s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces
+[5.713s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg
+[5.713s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[5.714s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail
+[5.714s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__type_support.c
+[5.714s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__rosidl_typesupport_introspection_c.h
+[5.714s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__type_support.c
+[5.714s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__rosidl_typesupport_introspection_c.h
+[5.714s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_c.so
+[5.714s] -- Set non-toolchain portion of runtime path of "/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_c.so" to ""
+[5.714s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_typesupport_c.so
+[5.714s] -- Set non-toolchain portion of runtime path of "/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_typesupport_c.so" to ""
+[5.714s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces
+[5.715s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg
+[5.715s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/rosidl_generator_cpp__visibility_control.hpp
+[5.715s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/tracked_object_array.hpp
+[5.715s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/tracked_object.hpp
+[5.715s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail
+[5.715s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__struct.hpp
+[5.715s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__struct.hpp
+[5.716s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__builder.hpp
+[5.716s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__type_support.hpp
+[5.716s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__traits.hpp
+[5.716s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__builder.hpp
+[5.716s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__traits.hpp
+[5.716s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__type_support.hpp
+[5.716s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces
+[5.716s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg
+[5.716s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[5.717s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail
+[5.717s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/dds_fastrtps
+[5.717s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__rosidl_typesupport_fastrtps_cpp.hpp
+[5.717s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__rosidl_typesupport_fastrtps_cpp.hpp
+[5.717s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[5.717s] -- Set non-toolchain portion of runtime path of "/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""
+[5.717s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces
+[5.717s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg
+[5.717s] -- Up-to-date: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail
+[5.718s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__rosidl_typesupport_introspection_cpp.hpp
+[5.718s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object__type_support.cpp
+[5.718s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__rosidl_typesupport_introspection_cpp.hpp
+[5.718s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/include/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces/msg/detail/tracked_object_array__type_support.cpp
+[5.718s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_cpp.so
+[5.718s] -- Set non-toolchain portion of runtime path of "/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_cpp.so" to ""
+[5.718s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_typesupport_cpp.so
+[5.718s] -- Set non-toolchain portion of runtime path of "/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_typesupport_cpp.so" to ""
+[5.718s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/environment/pythonpath.sh
+[5.719s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/environment/pythonpath.dsv
+[5.719s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces-0.0.0-py3.12.egg-info
+[5.719s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces-0.0.0-py3.12.egg-info/SOURCES.txt
+[5.719s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces-0.0.0-py3.12.egg-info/top_level.txt
+[5.719s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces-0.0.0-py3.12.egg-info/PKG-INFO
+[5.720s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces-0.0.0-py3.12.egg-info/dependency_links.txt
+[5.720s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces
+[5.720s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/msg
+[5.720s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/msg/_tracked_object_array_s.c
+[5.720s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/msg/__init__.py
+[5.721s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/msg/_tracked_object_array.py
+[5.721s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/msg/_tracked_object.py
+[5.721s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/msg/_tracked_object_s.c
+[5.721s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_c.so
+[5.721s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/_dynamic_obstacle_detector_interfaces_s.ep.rosidl_typesupport_c.c
+[5.721s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_fastrtps_c.so
+[5.721s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/_dynamic_obstacle_detector_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+[5.721s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/__init__.py
+[5.721s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/_dynamic_obstacle_detector_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+[5.721s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_introspection_c.so
+[5.751s] Listing '/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces'...
+[5.751s] Compiling '/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/__init__.py'...
+[5.751s] Listing '/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/msg'...
+[5.751s] Compiling '/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/msg/__init__.py'...
+[5.751s] Compiling '/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/msg/_tracked_object.py'...
+[5.751s] Compiling '/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/msg/_tracked_object_array.py'...
+[5.755s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_fastrtps_c.so
+[5.755s] -- Set non-toolchain portion of runtime path of "/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_fastrtps_c.so" to ""
+[5.755s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_introspection_c.so
+[5.756s] -- Set non-toolchain portion of runtime path of "/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_introspection_c.so" to ""
+[5.756s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_c.so
+[5.756s] -- Set non-toolchain portion of runtime path of "/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/python3.12/site-packages/dynamic_obstacle_detector_interfaces/dynamic_obstacle_detector_interfaces_s__rosidl_typesupport_c.so" to ""
+[5.756s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_generator_py.so
+[5.756s] -- Set non-toolchain portion of runtime path of "/root/ros_workspace/install/dynamic_obstacle_detector_interfaces/lib/libdynamic_obstacle_detector_interfaces__rosidl_generator_py.so" to ""
+[5.756s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/msg/TrackedObject.idl
+[5.757s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/msg/TrackedObjectArray.idl
+[5.757s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/msg/TrackedObject.msg
+[5.757s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/msg/TrackedObjectArray.msg
+[5.757s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/ament_index/resource_index/package_run_dependencies/dynamic_obstacle_detector_interfaces
+[5.757s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/ament_index/resource_index/parent_prefix_path/dynamic_obstacle_detector_interfaces
+[5.757s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/environment/ament_prefix_path.sh
+[5.757s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/environment/ament_prefix_path.dsv
+[5.757s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/environment/path.sh
+[5.758s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/environment/path.dsv
+[5.758s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/local_setup.bash
+[5.758s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/local_setup.sh
+[5.758s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/local_setup.zsh
+[5.758s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/local_setup.dsv
+[5.758s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/package.dsv
+[5.758s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/ament_index/resource_index/packages/dynamic_obstacle_detector_interfaces
+[5.758s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/export_dynamic_obstacle_detector_interfaces__rosidl_generator_cExport.cmake
+[5.758s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/export_dynamic_obstacle_detector_interfaces__rosidl_generator_cExport-noconfig.cmake
+[5.759s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/export_dynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+[5.759s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/export_dynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[5.759s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/dynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[5.759s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/dynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[5.759s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/dynamic_obstacle_detector_interfaces__rosidl_typesupport_cExport.cmake
+[5.759s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/dynamic_obstacle_detector_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[5.759s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/export_dynamic_obstacle_detector_interfaces__rosidl_generator_cppExport.cmake
+[5.759s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/export_dynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+[5.759s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/export_dynamic_obstacle_detector_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[5.760s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/dynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[5.760s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/dynamic_obstacle_detector_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[5.760s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/dynamic_obstacle_detector_interfaces__rosidl_typesupport_cppExport.cmake
+[5.760s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/dynamic_obstacle_detector_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[5.760s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/export_dynamic_obstacle_detector_interfaces__rosidl_generator_pyExport.cmake
+[5.760s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/export_dynamic_obstacle_detector_interfaces__rosidl_generator_pyExport-noconfig.cmake
+[5.761s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/rosidl_cmake-extras.cmake
+[5.761s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[5.761s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[5.761s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[5.761s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[5.761s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[5.762s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[5.762s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/dynamic_obstacle_detector_interfacesConfig.cmake
+[5.762s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/cmake/dynamic_obstacle_detector_interfacesConfig-version.cmake
+[5.762s] -- Installing: /root/ros_workspace/install/dynamic_obstacle_detector_interfaces/share/dynamic_obstacle_detector_interfaces/package.xml
+[5.765s] Invoked command in '/root/ros_workspace/build/dynamic_obstacle_detector_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /root/ros_workspace/build/dynamic_obstacle_detector_interfaces

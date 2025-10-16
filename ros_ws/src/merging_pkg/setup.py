@@ -18,12 +18,13 @@ setup(
     zip_safe=True,
     maintainer='root',
     maintainer_email='root@todo.todo',
-    description='Custom map merging package with dynamic save functionality',
+    description='Custom map merging package with laser filtering',
     license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'merger_node = merging_pkg.robust_map_merger:main',
+            'robot_laser_filter = merging_pkg.robot_laser_filter:main',
         ],
     },
 )

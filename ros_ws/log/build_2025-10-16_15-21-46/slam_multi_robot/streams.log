@@ -1,0 +1,65 @@
+[0.613s] Invoking command in '/root/ros_workspace/src/slam_multi_robot': AMENT_PREFIX_PATH=/root/ros_workspace/install/dynamic_obstacle_detector:${AMENT_PREFIX_PATH} PYTHONPATH=/root/ros_workspace/build/slam_multi_robot/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages:/root/ros_workspace/install/dynamic_obstacle_detector/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/slam_multi_robot build --build-base /root/ros_workspace/build/slam_multi_robot/build install --record /root/ros_workspace/build/slam_multi_robot/install.log --single-version-externally-managed install_data
+[0.766s] running egg_info
+[0.766s] creating ../../build/slam_multi_robot/slam_multi_robot.egg-info
+[0.777s] writing ../../build/slam_multi_robot/slam_multi_robot.egg-info/PKG-INFO
+[0.777s] writing dependency_links to ../../build/slam_multi_robot/slam_multi_robot.egg-info/dependency_links.txt
+[0.777s] writing requirements to ../../build/slam_multi_robot/slam_multi_robot.egg-info/requires.txt
+[0.777s] writing top-level names to ../../build/slam_multi_robot/slam_multi_robot.egg-info/top_level.txt
+[0.777s] writing manifest file '../../build/slam_multi_robot/slam_multi_robot.egg-info/SOURCES.txt'
+[0.795s] reading manifest file '../../build/slam_multi_robot/slam_multi_robot.egg-info/SOURCES.txt'
+[0.796s] writing manifest file '../../build/slam_multi_robot/slam_multi_robot.egg-info/SOURCES.txt'
+[0.796s] running build
+[0.796s] running build_py
+[0.797s] creating /root/ros_workspace/build/slam_multi_robot/build
+[0.797s] creating /root/ros_workspace/build/slam_multi_robot/build/lib
+[0.797s] creating /root/ros_workspace/build/slam_multi_robot/build/lib/multi_robot_scripts
+[0.797s] copying multi_robot_scripts/__init__.py -> /root/ros_workspace/build/slam_multi_robot/build/lib/multi_robot_scripts
+[0.797s] copying multi_robot_scripts/utils.py -> /root/ros_workspace/build/slam_multi_robot/build/lib/multi_robot_scripts
+[0.798s] creating /root/ros_workspace/build/slam_multi_robot/build/lib/slam_multi_robot
+[0.798s] copying slam_multi_robot/__init__.py -> /root/ros_workspace/build/slam_multi_robot/build/lib/slam_multi_robot
+[0.798s] running install
+[0.801s] running install_lib
+[0.810s] creating /root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/multi_robot_scripts
+[0.810s] copying /root/ros_workspace/build/slam_multi_robot/build/lib/multi_robot_scripts/__init__.py -> /root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/multi_robot_scripts
+[0.811s] copying /root/ros_workspace/build/slam_multi_robot/build/lib/multi_robot_scripts/utils.py -> /root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/multi_robot_scripts
+[0.811s] creating /root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/slam_multi_robot
+[0.811s] copying /root/ros_workspace/build/slam_multi_robot/build/lib/slam_multi_robot/__init__.py -> /root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/slam_multi_robot
+[0.812s] byte-compiling /root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/multi_robot_scripts/__init__.py to __init__.cpython-312.pyc
+[0.812s] byte-compiling /root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/multi_robot_scripts/utils.py to utils.cpython-312.pyc
+[0.814s] byte-compiling /root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/slam_multi_robot/__init__.py to __init__.cpython-312.pyc
+[0.814s] running install_data
+[0.814s] creating /root/ros_workspace/install/slam_multi_robot/share/ament_index
+[0.815s] creating /root/ros_workspace/install/slam_multi_robot/share/ament_index/resource_index
+[0.815s] creating /root/ros_workspace/install/slam_multi_robot/share/ament_index/resource_index/packages
+[0.815s] copying resource/slam_multi_robot -> /root/ros_workspace/install/slam_multi_robot/share/ament_index/resource_index/packages
+[0.815s] copying package.xml -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot
+[0.815s] creating /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/launch
+[0.815s] copying launch/tb3_slam.launch.py -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/launch
+[0.816s] copying launch/navigation.launch.py -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/launch
+[0.816s] copying launch/general_bringup.launch.py -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/launch
+[0.817s] copying launch/tb4_slam.launch.py -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/launch
+[0.817s] copying launch/gazebo_world.launch.py -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/launch
+[0.817s] copying launch/tb2_slam.launch.py -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/launch
+[0.817s] copying launch/static_transform.launch.py -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/launch
+[0.817s] copying launch/slam_bringup.launch.py -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/launch
+[0.818s] copying launch/tb1_slam.launch.py -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/launch
+[0.818s] creating /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/params
+[0.818s] copying params/tb4_slam.yaml -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/params
+[0.818s] copying params/params_nav_tb1.yaml -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/params
+[0.818s] copying params/tb1_slam.yaml -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/params
+[0.818s] copying params/mapper_params_online_async.yaml -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/params
+[0.818s] copying params/tb2_slam.yaml -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/params
+[0.819s] copying params/tb3_slam.yaml -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/params
+[0.819s] copying params/general_slam_params.yaml -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/params
+[0.819s] creating /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/rviz
+[0.819s] copying rviz/tb3_navigation2.rviz -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/rviz
+[0.819s] creating /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/config
+[0.819s] copying config/robots.yaml -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/config
+[0.820s] copying config/gz_bridge.yaml -> /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/config
+[0.820s] creating /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/map
+[0.820s] creating /root/ros_workspace/install/slam_multi_robot/share/slam_multi_robot/launch/nav2_custom
+[0.820s] running install_egg_info
+[0.829s] Copying ../../build/slam_multi_robot/slam_multi_robot.egg-info to /root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/slam_multi_robot-0.0.0-py3.12.egg-info
+[0.829s] running install_scripts
+[0.902s] writing list of installed files to '/root/ros_workspace/build/slam_multi_robot/install.log'
+[0.930s] Invoked command in '/root/ros_workspace/src/slam_multi_robot' returned '0': AMENT_PREFIX_PATH=/root/ros_workspace/install/dynamic_obstacle_detector:${AMENT_PREFIX_PATH} PYTHONPATH=/root/ros_workspace/build/slam_multi_robot/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages:/root/ros_workspace/install/dynamic_obstacle_detector/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/slam_multi_robot build --build-base /root/ros_workspace/build/slam_multi_robot/build install --record /root/ros_workspace/build/slam_multi_robot/install.log --single-version-externally-managed install_data

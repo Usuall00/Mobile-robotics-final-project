@@ -1,0 +1,3 @@
+[console_scripts]
+merger_node = merging_pkg.robust_map_merger:main
+robot_laser_filter = merging_pkg.robot_laser_filter:main

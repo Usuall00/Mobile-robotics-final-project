@@ -1,0 +1,9 @@
+free_thresh: 0.25
+image: merged_map_shutdown.pgm
+negate: 0
+occupied_thresh: 0.65
+origin:
+- -3.4125479996914176
+- -2.8933651100861173
+- 0.0
+resolution: 0.05
