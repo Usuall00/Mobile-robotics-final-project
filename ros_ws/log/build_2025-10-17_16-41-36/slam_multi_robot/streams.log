@@ -1,0 +1,22 @@
+[0.629s] Invoking command in '/root/ros_workspace/src/slam_multi_robot': AMENT_PREFIX_PATH=/root/ros_workspace/install/dynamic_obstacle_detector:${AMENT_PREFIX_PATH} PYTHONPATH=/root/ros_workspace/build/slam_multi_robot/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages:/root/ros_workspace/install/dynamic_obstacle_detector/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/slam_multi_robot build --build-base /root/ros_workspace/build/slam_multi_robot/build install --record /root/ros_workspace/build/slam_multi_robot/install.log --single-version-externally-managed install_data
+[0.795s] running egg_info
+[0.804s] writing ../../build/slam_multi_robot/slam_multi_robot.egg-info/PKG-INFO
+[0.805s] writing dependency_links to ../../build/slam_multi_robot/slam_multi_robot.egg-info/dependency_links.txt
+[0.805s] writing requirements to ../../build/slam_multi_robot/slam_multi_robot.egg-info/requires.txt
+[0.805s] writing top-level names to ../../build/slam_multi_robot/slam_multi_robot.egg-info/top_level.txt
+[0.823s] reading manifest file '../../build/slam_multi_robot/slam_multi_robot.egg-info/SOURCES.txt'
+[0.824s] writing manifest file '../../build/slam_multi_robot/slam_multi_robot.egg-info/SOURCES.txt'
+[0.824s] running build
+[0.824s] running build_py
+[0.825s] copying multi_robot_scripts/utils.py -> /root/ros_workspace/build/slam_multi_robot/build/lib/multi_robot_scripts
+[0.825s] running install
+[0.830s] running install_lib
+[0.840s] copying /root/ros_workspace/build/slam_multi_robot/build/lib/multi_robot_scripts/utils.py -> /root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/multi_robot_scripts
+[0.840s] byte-compiling /root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/multi_robot_scripts/utils.py to utils.cpython-312.pyc
+[0.842s] running install_data
+[0.842s] running install_egg_info
+[0.852s] removing '/root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/slam_multi_robot-0.0.0-py3.12.egg-info' (and everything under it)
+[0.852s] Copying ../../build/slam_multi_robot/slam_multi_robot.egg-info to /root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages/slam_multi_robot-0.0.0-py3.12.egg-info
+[0.853s] running install_scripts
+[0.928s] writing list of installed files to '/root/ros_workspace/build/slam_multi_robot/install.log'
+[0.953s] Invoked command in '/root/ros_workspace/src/slam_multi_robot' returned '0': AMENT_PREFIX_PATH=/root/ros_workspace/install/dynamic_obstacle_detector:${AMENT_PREFIX_PATH} PYTHONPATH=/root/ros_workspace/build/slam_multi_robot/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros_workspace/install/slam_multi_robot/lib/python3.12/site-packages:/root/ros_workspace/install/dynamic_obstacle_detector/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/slam_multi_robot build --build-base /root/ros_workspace/build/slam_multi_robot/build install --record /root/ros_workspace/build/slam_multi_robot/install.log --single-version-externally-managed install_data
