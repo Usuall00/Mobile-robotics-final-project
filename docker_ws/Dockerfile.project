@@ -1,7 +1,5 @@
 FROM ros:jazzy
 
-# Group installations into a single layer to optimize the build and image.
-# Adds 'x11-apps' to provide necessary libraries for GUI applications.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # GUI Libraries
     x11-apps \
