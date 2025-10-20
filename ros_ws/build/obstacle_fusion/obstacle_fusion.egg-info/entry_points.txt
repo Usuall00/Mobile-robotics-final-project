@@ -1,3 +1,0 @@
-[console_scripts]
-fusion_node = obstacle_fusion.fusion_node:main
-prediction_to_costmap_node = obstacle_fusion.prediction_to_costmap_node:main
