@@ -1,1 +1,1 @@
-docker exec -it lab7 bash
+docker exec -it multi_robot bash

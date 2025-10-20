@@ -5,6 +5,6 @@ docker run -it --rm --net host --ipc host \
     -e DISPLAY=$DISPLAY \
     -e XAUTHORITY=$XAUTHORITY \
     -v ./ros_ws/:/root/ros_workspace \
-    --name lab7 \
-    ros:livelab7 bash
+    --name multi_robot \
+    ros:multi_robot bash
     
