@@ -10,6 +10,7 @@ The system is divided into two main sections:
 
 ## 📁 Project Structure
 
+```
 .
 ├── docker_ws/ # Docker workspace for containerized simulation
 ├── ros_ws/ # Main ROS 2 workspace containing all custom packages
@@ -17,13 +18,13 @@ The system is divided into two main sections:
 ├── run.sh # Script to start the Docker container
 ├── exec.sh # Script to open a shell into the running container
 └── README.md # This file
-
+```
 
 ### `ros_ws/src` contains:
 
 #### 🧭 `slam_multi_robot`
 Handles the **multi-robot SLAM phase**, launching robot instances, RViz visualization, and map merging.
-
+```
 slam_multi_robot/
 ├── config/
 │ └── gz_bridge.yaml # Defines Gazebo-ROS2 bridge topics and directions
@@ -44,10 +45,10 @@ slam_multi_robot/
 ├── package.xml
 ├── setup.cfg
 └── setup.py
-
+```
 #### 🗺️ `merging_pkg`
 Implements **map fusion and LiDAR filtering** between robots to enable cooperative SLAM.
-
+```
 merging_pkg/
 ├── launch/
 │ ├── laser_filters.launch.py # Launches LiDAR filtering nodes
@@ -59,10 +60,10 @@ merging_pkg/
 ├── package.xml
 ├── setup.cfg
 └── setup.py
-
+```
 #### 🚶‍♂️ `dynamic_obstacle_detector`
 Provides nodes for detecting, tracking, and predicting the motion of dynamic obstacles in the environment.
-
+```
 dynamic_obstacle_detector/
 ├── dynamic_obstacle_detector/
 │   ├── __init__.py               # Marks the folder as a Python package 
@@ -72,10 +73,10 @@ dynamic_obstacle_detector/
 ├── package.xml                   # Package metadata and dependencies
 ├── setup.cfg                     # Makes package discoverable by ros2 run
 └── setup.py                      # Installation script
-
+```
 #### 🔀 `obstacle_fusion`
 Fuses obstacle information coming from multiple robots into a single global dynamic map.
-
+```
 obstacle_fusion/
 ├── obstacle_fusion/
 │   ├── __init__.py             # Marks the folder as a Python package 
@@ -85,7 +86,7 @@ obstacle_fusion/
 ├── package.xml                 # Package metadata and dependencies
 ├── setup.cfg                   # Makes package discoverable by ros2 run
 └── setup.py                    # Installation script
-
+```
 
 ## 🐳 Running the Project via Docker
 1️⃣ Clone the Repository and Build the Docker Image
