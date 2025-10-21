@@ -247,12 +247,12 @@ robots:
 ```
 💡 Robots can be easily added, removed, or repositioned by editing this configuration file.
 
-🧩 Summary
+## 🧩 Summary
 Section	Main Packages	Purpose
 SLAM Section	slam_multi_robot, merging_pkg	Cooperative multi-robot SLAM and map merging
 Navigation with Fusion and Prediction Section	multi_robot_bringup, dynamic_obstacle_detector, obstacle_fusion	Autonomous navigation with dynamic obstacle prediction and fusion
 
-🧠 Credits
+## 🧠 Credits
 Developed as part of a research project on multi-robot cooperative exploration and navigation using ROS 2 Jazzy and Gazebo Ignition.
 It demonstrates the integration of SLAM, perception, fusion, and dynamic path planning within a scalable, modular framework.
 
