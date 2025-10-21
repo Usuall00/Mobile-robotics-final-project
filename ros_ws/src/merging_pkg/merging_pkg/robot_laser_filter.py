@@ -14,20 +14,20 @@ class RobotLaserFilter(Node):
     def __init__(self):
         super().__init__('robot_laser_filter')
         
-        # Parametri configurabili
+        # Configurable parameters
         self.robot_name = self.declare_parameter('robot_name', 'tb1').value
         self.robot_radius = self.declare_parameter('robot_radius', 0.3).value
         self.safety_margin = self.declare_parameter('safety_margin', 0.2).value
         self.filter_enabled = self.declare_parameter('filter_enabled', True).value
         
-        # Carica la lista degli altri robot dal file YAML
+        # Loads other robots list from the configuration file
         self.other_robots = self.load_other_robots_config()
         
-        # TF buffer per le trasformate
+        # TF buffer
         self.tf_buffer = tf2_ros.Buffer()
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
         
-        # Publisher e Subscriber
+        # Publisher and Subscriber
         self.filtered_scan_pub = self.create_publisher(
             LaserScan, 
             f'/{self.robot_name}/filtered_scan', 
@@ -44,12 +44,12 @@ class RobotLaserFilter(Node):
         self.lock = Lock()
         self.filtered_count = 0
         
-        # Stati del filtro
+        # Filter states
         self.filter_state = "BOOTSTRAP"  # BOOTSTRAP → PARTIAL → FULL
         self.bootstrap_start_time = self.get_clock().now()
         self.bootstrap_duration = 10.0  # secondi
         
-        # Timer per transizione di stato
+        # State transition timer
         self.state_timer = self.create_timer(2.0, self.update_filter_state)
         
         self.get_logger().info(f"Robot filter started for {self.robot_name}")

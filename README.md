@@ -92,7 +92,7 @@ obstacle_fusion/
 1️⃣ Clone the Repository and Build the Docker Image
 ```bash
 
-git clone https://github.com/christian-ronchi/Multi-Robot-Autonomous-Navigation.git
+git clone https://github.com/Usuall00/Mobile-robotics-final-project.git
 cd docker_ws
 chmod +x build.sh
 ./build.sh

@@ -52,7 +52,7 @@ def generate_launch_description():
             output='screen',
             namespace="",
             remappings=[('map', f'{robot_name}/map')],
-            autostart=True  # Questo dovrebbe gestire automaticamente configure/activate
+            autostart=True  
         )
 
         # Add with staggered delay

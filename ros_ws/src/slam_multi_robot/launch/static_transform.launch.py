@@ -29,8 +29,7 @@ def generate_launch_description():
     
     
 
-    
-    # Leggi il file YAML per determinare quali robot abilitare
+    # Read the YAML file to determine which robots to enable
     pkg_slam_multi_robot = get_package_share_directory('slam_multi_robot')
     pkg_multi_robot_bringup = get_package_share_directory('multi_robot_bringup')
     actual_config_path = os.path.join(pkg_multi_robot_bringup, 'config', 'robots.yaml')
@@ -39,11 +38,11 @@ def generate_launch_description():
         with open(actual_config_path, 'r') as file:
             config_data = yaml.safe_load(file)
         
-        # Itera attraverso tutti i robot
+        # Iterate through all robots defined in the config file
         for robot in config_data['robots']:
-            # Controlla se il robot è abilitato
+            # Check if the robot is enabled
             if robot.get('enabled', False):
-                # Crea lo static transform publisher per il robot
+                # Create a static transform publisher for the enabled robot
                 static_transform_node = Node(
                     package='tf2_ros',
                     executable='static_transform_publisher',
@@ -63,6 +62,6 @@ def generate_launch_description():
                 
     except Exception as e:
         print(f"Error reading config file: {e}")
-        # Potresti voler gestire l'errore in modo diverso
+        # You might want to handle the error differently, e.g., by raising it
     
     return launch_description

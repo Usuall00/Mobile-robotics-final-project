@@ -17,7 +17,7 @@ def generate_launch_description():
         description="Use simulation clock"
     )
     
-    # Carica le configurazioni dei robot dal file YAML
+    # Load robot configurations
     config_path = os.path.join(
         get_package_share_directory("multi_robot_bringup"),
         'config',
@@ -34,7 +34,7 @@ def generate_launch_description():
         if 'robots' in config_data:
             for robot in config_data['robots']:
                 if robot['enabled']:
-                    # Crea un filtro per ogni robot abilitato
+                    # Create a filter for each enabled robot
                     node = Node(
                         package="merging_pkg",
                         executable="robot_laser_filter",
@@ -57,8 +57,8 @@ def generate_launch_description():
         print(f"🎯 Total laser filters: {len(filter_nodes)} for robots: {enabled_robots}")
     
     except Exception as e:
-        print(f"❌ Error loading robot configurations: {e}")
-        print("🔄 Using default robot configurations...")
+        print(f"Error loading robot configurations: {e}")
+        print("Using default robot configurations...")
         
         # Fallback ai robot di default
         default_robots = ['tb1', 'tb2']

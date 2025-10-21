@@ -129,7 +129,7 @@ class RobustMapMerger(Node):
             pgm_filename = os.path.join(save_directory, f"{map_name}.pgm")
             self.save_map_as_pgm(map_msg, pgm_filename)
             
-            # Salva YAML file 
+            # Save YAML file
             yaml_filename = os.path.join(save_directory, f"{map_name}.yaml")
             self.save_map_as_yaml(map_msg, f"{map_name}.pgm", yaml_filename)
             
@@ -146,7 +146,7 @@ class RobustMapMerger(Node):
         height = map_msg.info.height
         
         with open(filename, 'wb') as pgm_file:
-            # Header PGM
+            # PGM header
             header = f"P5\n{width} {height}\n255\n"
             pgm_file.write(header.encode())
 
@@ -156,11 +156,11 @@ class RobustMapMerger(Node):
                     idx = i * width + j
                     value = map_msg.data[idx]
                     
-                    # Converts to PGM format
+                    # Convert OccupancyGrid values to PGM grayscale values
                     if value == -1:  # Unknown
                         pgm_value = 205  # Grey
                     elif value == 0:   # Free
-                        pgm_value = 254  # White
+                        pgm_value = 254  # White (or 255)
                     elif value == 100: # Occupied
                         pgm_value = 0   # Black
                     else:              # Intermediate values

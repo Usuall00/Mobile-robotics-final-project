@@ -8,7 +8,7 @@ import os
 
 def generate_launch_description():
 
-    # Percorsi completi ai singoli launch file
+    # Define paths to the launch files for various components
     pkg_slam_multi_robot = get_package_share_directory('slam_multi_robot')
     pkg_merging_pkg = get_package_share_directory('merging_pkg')
     gazebo_launch = os.path.join(pkg_slam_multi_robot, 'launch', 'gazebo_world.launch.py')
@@ -18,11 +18,11 @@ def generate_launch_description():
     transform_launch = os.path.join(pkg_slam_multi_robot, 'launch', 'static_transform.launch.py')
     filter_launch = os.path.join(pkg_merging_pkg, 'launch', 'laser_filters.launch.py')
 
-    # Launches Gazebo immediately
+    # Launch Gazebo simulation environment
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(gazebo_launch)  
     )
-
+    # Launch static transform publishers with a delay
     transform_launch = TimerAction(
         period=5.0,
         actions=[
@@ -32,6 +32,7 @@ def generate_launch_description():
         ]
     )
 
+    # Launch laser filters with a delay
     filter_launch = TimerAction(
         period=10.0,
         actions=[
@@ -42,7 +43,7 @@ def generate_launch_description():
     )
 
 
-    # Launches tb_slam after 15 seconds
+    # Launch SLAM nodes with a delay
     tb_slam = TimerAction(
         period=15.0,
         actions=[
@@ -52,7 +53,7 @@ def generate_launch_description():
         ]
     )
 
-    # Launches merge_maps after 15 seconds
+    # Launch map merging node with a delay
     merge_maps = TimerAction(
         period=15.0,
         actions=[
@@ -62,7 +63,7 @@ def generate_launch_description():
         ]
     )
     
-    # Launches navigation after 20 seconds
+    # Launch navigation stack with a delay
     navigation_launch = TimerAction(
         period=30.0,
         actions=[

@@ -17,9 +17,8 @@ def generate_launch_description():
     -  Sets up file paths for configurations, maps, and RViz.
     -  Declares launch arguments for simulation time.
     -  Reads a robot configuration file to determine which robots to launch.
-    -  For each enabled robot, it: 
-        - Launches a namespaced Slam toolbox instance for SLAM.
-        - Launches a namespaced Nav2 stack for navigation.
+    -  For each enabled robot, it:
+        - Launches a namespaced Nav2 stack.
         - Launches a namespaced RViz instance for visualization.
     """
     # Set up paths and environment variables
@@ -30,10 +29,6 @@ def generate_launch_description():
     rviz_template_path = os.path.join(pkg_slam_multi_robot, 'rviz', 'tb3_navigation2.rviz')
     params_template = os.path.join(pkg_slam_multi_robot, 'params', 'params_nav2.yaml')
   
-    
-
-
-
     # Get the TurtleBot3 model from the environment variable, defaulting to 'burger'
     tb3_model = os.environ.get('TURTLEBOT3_MODEL', 'burger')
 
@@ -45,13 +40,10 @@ def generate_launch_description():
         description='Use simulation (Gazebo) clock if true'
     )
 
-    # Create the main launch description and add arguments
     ld = LaunchDescription()
     ld.add_action(declare_use_sim_time_arg)
     
-    # Get the launch argument values
     use_sim_time = LaunchConfiguration('use_sim_time')
-
 
     # Load robot configurations and launch per-robot nodes
     with open(robot_config_path, 'r') as f:
@@ -64,15 +56,9 @@ def generate_launch_description():
         rviz_config = generate_rviz_config(robot_name, rviz_template_path)
         params_file = generate_namespaced_nav2_params(params_template, robot_name)
 
-        
-
-
         # Remap TF topics to the global /tf and /tf_static topics. This is crucial
         # for having a single, unified TF tree that all nodes can use.
         remappings = [('tf', '/tf'), ('tf_static', '/tf_static')]
-
-       
-
         
         # Define the list of lifecycle nodes for this robot's Nav2 stack
         robot_lifecycle_nodes = [
@@ -83,7 +69,6 @@ def generate_launch_description():
             'waypoint_follower',
             'velocity_smoother',
             'collision_monitor',
-            
         ]
 
         # Resolve the path to the behavior tree XML file at launch time
@@ -92,8 +77,6 @@ def generate_launch_description():
             'behavior_trees',
             'navigate_to_pose_w_replanning_and_recovery.xml'
         ])
-
-                
 
         # Create the Nav2 stack nodes for the current robot
         nav2_nodes = [
@@ -168,8 +151,6 @@ def generate_launch_description():
                 parameters=[params_file, {'use_sim_time': use_sim_time}],
                 remappings=remappings
             ),
-           
-           
         ]
 
         # Create an RViz node for this robot
@@ -193,17 +174,14 @@ def generate_launch_description():
             output='screen',
             parameters=[
                 {'use_sim_time': use_sim_time},
-                {'autostart': True}, # Automatically start the lifecycle nodes
+                {'autostart': True},
                 {'node_names': robot_lifecycle_nodes}
             ]
         )
 
-        
-
         # Add all nodes for this robot to the launch description
         for node in nav2_nodes:
             ld.add_action(node)
-        
         
         ld.add_action(lifecycle_manager_nav)
         ld.add_action(rviz_node)

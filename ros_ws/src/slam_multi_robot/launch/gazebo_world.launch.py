@@ -139,7 +139,7 @@ def generate_launch_description():
         bridge_template = os.path.join(pkg_turtlebot3_gazebo, 'params', f'turtlebot3_{tb3_model}_bridge.yaml')
         namespaced_bridge = create_namespaced_bridge_yaml(bridge_template, namespace)
 
-       # ROS <-> Gazebo bridge node per ogni robot
+       # ROS <-> Gazebo bridge node for each robot
         bridge_node = Node(
             package='ros_gz_bridge',
             executable='parameter_bridge',
