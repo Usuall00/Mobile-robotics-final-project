@@ -62,7 +62,7 @@ merging_pkg/
 └── setup.py
 ```
 #### 🚶‍♂️ `dynamic_obstacle_detector`
-Provides nodes for detecting, tracking, and predicting the motion of dynamic obstacles in the environment.
+Provides nodes for detecting, tracking, and predicting the motion of moving obstacles in the environment.
 ```
 dynamic_obstacle_detector/
 ├── dynamic_obstacle_detector/
@@ -208,23 +208,27 @@ The global map obtained from the SLAM phase can be used as the environment refer
 The multi_robot_bringup package launches the Nav2 stack for each active robot, enabling goal-based navigation and autonomous path planning.
 
 The RViz configuration allows real-time visualization of both robot trajectories and predicted obstacle motion.
-
-### 🚀 How to Run the Navigation Section
 </details>
 
+### 🚀 How to Run the Navigation Section
+
 1️⃣ Launch the Gazebo Simulation
+
 ```bash
 ros2 launch multi_robot_bringup tb3_world.launch.py
 ```
 2️⃣ Launch Nav2 and Dynamic Obstacle System
+
 ```bash
 ros2 launch multi_robot_bringup tb3_nav2.launch.py
 ```
 3️⃣ Set Navigation Goals
+
 Use RViz to set navigation targets.
 Robots will navigate cooperatively while dynamically avoiding predicted obstacles.
 
 ⚙️ Robot Configuration
+
 Robots are defined in config/robots.yaml, specifying their namespace, initial pose, and whether they are active:
 
 ```yaml
